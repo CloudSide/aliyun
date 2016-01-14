@@ -19,9 +19,9 @@ class AliyunClient
 	protected $signatureMethod = "HMAC-SHA1";
 
 	protected $signatureVersion = "1.0";
-	
+
     protected  $dateTimeFormat = 'Y-m-d\TH:i:s\Z'; // ISO8601规范
-	
+
 	protected $sdkVersion = "1.0";
 
 	public function execute($request)
@@ -46,8 +46,9 @@ class AliyunClient
 		date_default_timezone_set("GMT");
 		$apiParams["TimeStamp"] = date($this->dateTimeFormat);
 		$apiParams["partner_id"] = $this->sdkVersion;
-		
-	    $apiNameArray =	split("\.", $request->getApiMethodName());
+
+	  //$apiNameArray =	split("\.", $request->getApiMethodName());
+		$apiNameArray =	explode('.', $request->getApiMethodName());
 		$apiParams["Action"] = $apiNameArray[3];
 		$apiParams["Version"] = $apiNameArray[4];
 		//签名
@@ -76,7 +77,7 @@ class AliyunClient
 			{
 				return  @simplexml_load_string($e->getMessage());
 			}
-	    }
+	  }
 
 		//解析API返回结果
 		$respWellFormed = false;
@@ -147,7 +148,7 @@ class AliyunClient
 		}
 		return $this->execute($req, $session);
 	}
-	
+
 	protected function percentEncode($str)
 	{
 	    // 使用urlencode编码后，将"+","*","%7E"做替换即满足 API规定的编码规范
@@ -157,29 +158,28 @@ class AliyunClient
 	    $res = preg_replace('/%7E/', '~', $res);
 	    return $res;
 	}
-	
+
 	protected function computeSignature($parameters, $accessKeySecret)
 	{
 	    // 将参数Key按字典顺序排序
 	    ksort($parameters);
-	
+
 	    // 生成规范化请求字符串
 	    $canonicalizedQueryString = '';
 	    foreach($parameters as $key => $value)
 	    {
-		$canonicalizedQueryString .= '&' . $this->percentEncode($key) 
-		    . '=' . $this->percentEncode($value);
+				$canonicalizedQueryString .= '&' . $this->percentEncode($key) . '=' . $this->percentEncode($value);
 	    }
-	
+
 	    // 生成用于计算签名的字符串 stringToSign
 	    $stringToSign = 'GET&%2F&' . $this->percentencode(substr($canonicalizedQueryString, 1));
-	
+
 	    // 计算签名，注意accessKeySecret后面要加上字符'&'
 	    $signature = base64_encode(hash_hmac('sha1', $stringToSign, $accessKeySecret . '&', true));
 	    return $signature;
 	}
-	
-    public function curl($url, $postFields = null)
+
+  public function curl($url, $postFields = null)
 	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -205,7 +205,7 @@ class AliyunClient
 			{
 				if("@" != substr($v, 0, 1))//判断是不是文件上传
 				{
-					$postBodyString .= "$k=" . urlencode($v) . "&"; 
+					$postBodyString .= "$k=" . urlencode($v) . "&";
 				}
 				else//文件上传用multipart/form-data，否则用www-form-urlencoded
 				{
@@ -224,7 +224,7 @@ class AliyunClient
 			}
 		}
 		$reponse = curl_exec($ch);
-		
+
 		if (curl_errno($ch))
 		{
 			throw new Exception(curl_error($ch),0);
@@ -240,15 +240,15 @@ class AliyunClient
 		$logger->conf["log_file"] = rtrim(TOP_SDK_WORK_DIR, '\\/') . '/' . "logs/top_comm_err_" . $this->accessKeyId . "_" . date("Y-m-d") . ".log";
 		$logger->conf["separator"] = "^_^";
 		$logData = array(
-		date("Y-m-d H:i:s"),
-		$apiName,
-		$this->accessKeyId,
-		$localIp,
-		PHP_OS,
-		$this->sdkVersion,
-		$requestUrl,
-		$errorCode,
-		str_replace("\n","",$responseTxt)
+			date("Y-m-d H:i:s"),
+			$apiName,
+			$this->accessKeyId,
+			$localIp,
+			PHP_OS,
+			$this->sdkVersion,
+			$requestUrl,
+			$errorCode,
+			str_replace("\n","",$responseTxt)
 		);
 		$logger->log($logData);
 	}
