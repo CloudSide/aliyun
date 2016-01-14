@@ -1,0 +1,22 @@
+{
+    "name": "cloudmario/aliyun",
+    "type": "library",
+    "description": "",
+    "keywords": ["aliyun","cloud","hehecloud"],
+    "homepage": "https://github.com/CloudSide/aliyun",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cloud Mario",
+            "email": "smcz@qq.com",
+            "homepage": "http://weibo.com/smcz",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": ["TopSdk.php"]
+    }
+}
