@@ -1,7 +1,7 @@
 {
     "name": "cloudmario/aliyun",
     "type": "library",
-    "description": "",
+    "description": "阿里云SDK",
     "keywords": ["aliyun","cloud","hehecloud"],
     "homepage": "https://github.com/CloudSide/aliyun",
     "license": "MIT",
