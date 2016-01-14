@@ -35,6 +35,22 @@ $c = new AliyunClient;
 $c->accessKeyId = "<accessKeyId>";
 $c->accessKeySecret = "<accessKeySecret>";
 $c->serverUrl = "<serverUrl>";
+
+//例如, 获取`云解析`的`records`
+$req = new Dns20150109DescribeDomainRecordsRequest;
+$req->setDomainName('hehe.com');
+try {
+	$resp = $c->execute($req);
+	if ( $resp->DomainRecords ) {
+		print_r($resp);
+	} else {
+		$code = $resp->Code;
+		$message = $resp->Message;
+		echo $code . " : " . $message;
+	}
+} catch (Exception $e) {
+	print_r($e);
+}
 ```
 
 [![](http://service.t.sina.com.cn/widget/qmd/1656360925/02781ba4/4.png)](http://weibo.com/smcz)
