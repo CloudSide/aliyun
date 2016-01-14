@@ -1,10 +1,10 @@
 Aliyun-SDK
 ====
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/cloudmario/aliyun.svg)](https://packagist.org/packages/cloudmario/aliyun)
-[![Latest Stable Version](https://img.shields.io/packagist/vpre/cloudmario/aliyun.svg)](https://packagist.org/packages/cloudmario/aliyun)
-[![Total Downloads](https://poser.pugx.org/cloudmario/aliyun/downloads)](https://packagist.org/packages/cloudmario/aliyun)
-[![License](https://poser.pugx.org/cloudmario/aliyun/license)](https://packagist.org/packages/cloudmario/aliyun)
+[![Latest Stable Version](https://img.shields.io/packagist/v/cloudmario/hehe-aliyun.svg)](https://packagist.org/packages/cloudmario/hehe-aliyun)
+[![Latest Stable Version](https://img.shields.io/packagist/vpre/cloudmario/hehe-aliyun.svg)](https://packagist.org/packages/cloudmario/hehe-aliyun)
+[![Total Downloads](https://poser.pugx.org/cloudmario/hehe-aliyun/downloads)](https://packagist.org/packages/cloudmario/hehe-aliyun)
+[![License](https://poser.pugx.org/cloudmario/hehe-aliyun/license)](https://packagist.org/packages/cloudmario/hehe-aliyun)
 
 
 #### Requirements
@@ -15,7 +15,7 @@ use composer
 composer.json:
 ```json
 "require": {
-	"cloudmario/aliyun": "dev-master"
+	"cloudmario/hehe-aliyun": "dev-master"
 }
 ```
 
